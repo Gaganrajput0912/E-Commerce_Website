@@ -1,22 +1,26 @@
-
-import "./App.css"
-import Home from "./Layout/Home";
-import Footer from "./Layout/Footer";
-import Navbar from "./Layout/Navbar";
-import { Nav, NavbarBrand } from "react-bootstrap";
-
+import { Fragment,useState } from "react";
+import Header from "./Components/Layout/Header/Header";
+import Body from "./Components/Layout/Body/body";
+import Footer from "./Components/Layout/Footer/Footer";
+import Cart from "./Components/Cart/Cart";
 
 function App() {
+  const[cartIsShown,setCartIsShown]=useState(false)
+
+  const ShowCartHandler=()=>{
+    setCartIsShown(true)
+  }
+
+  const HideCartHandler=()=>{
+    setCartIsShown(false)
+  }
   return (
-    <>
-    <Navbar />
-    <Home />
-    <Footer />
-    </>
-    
-     
-      
-    
+    <Fragment>
+     { cartIsShown && <Cart onClose={HideCartHandler}/>}
+      <Header onShowCart={ShowCartHandler}/>
+      <Body/>
+      <Footer/>
+    </Fragment>
   );
 }
 
